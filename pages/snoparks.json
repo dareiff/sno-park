@@ -1,0 +1,71 @@
+[
+    {
+        "snoParkRegion": "Mount Baker / Methow Valley",
+        "snoParkRegionURL": "https://www.parks.wa.gov/453/Mount-Baker-Methow",
+        "snoParks": [
+            {
+                "snoParkName": "Highlands",
+                "snoParkAddress": "Highlands Sno-Park, Tonasket, WA 98855",
+                "distanceFromSeattle": "5 hours",
+                "webcamLinks": ["https://www.example.com/mtbaker.jpg"],
+                "shortGroomingSummary": "Highlands SnoPark grooming does not occur on a fixed schedule, but instead the Highlands Nordic Ski club does condition responsive grooming.",
+                "groomingReportURL": "https://www.example.com/grooming-report.html",
+                "dogFriendly": false,
+                "amountOfMiles": 0
+            },
+            {
+                "snoParkName": "Salmon Ridge",
+                "snoParkAddress": "Salmon Ridge Sno-Park, WA-542, Deming, WA 98244",
+                "distanceFromSeattle": "2.75 hours",
+                "webcamLinks": ["https://www.example.com/salmonridge.jpg"],
+                "shortGroomingSummary": "Mondays, some Thursdays.",
+                "groomingReportURL": "https://www.nooksacknordicskiclub.org/trails/grooming-and-conditions/",
+                "dogFriendly": false,
+                "amountOfMiles": 0
+            },
+            {
+                "snoParkName": "Shadow of the Sentinals",
+                "snoParkAddress": "Shadow Of The Sentinels Trailhead, Marblemount, WA 98267",
+                "distanceFromSeattle": "2.75 hours",
+                "webcamLinks": ["https://www.example.com/sentinals.jpg"],
+                "shortGroomingSummary": "This is primarily an ungroomed Sno-Park.",
+                "dogFriendly": true,
+                "amountOfMiles": 0
+            },
+            {
+                "snoParkName": "South Summit",
+                "snoParkAddress": "South Summit Sno-Park, NF-41, Twisp, WA 98856",
+                "distanceFromSeattle": "2.75 hours",
+                "webcamLinks": ["https://www.example.com/southsummit.jpg"],
+                "shortGroomingSummary": "This is primarily an ungroomed Sno-Park.",
+                "dogFriendly": true,
+                "amountOfMiles": 0
+            }
+        ]
+    },
+    {
+        "snoParkRegion": "Leavenworth / Chelan",
+        "snoParkRegionURL": "https://www.parks.wa.gov/457/Leavenworth-Chelan",
+        "snoParks": []
+    },
+    {
+        "snoParkRegion": "Blewett / I-90 / Snoqualmie Pass",
+        "snoParkRegionURL": "https://www.parks.wa.gov/459/Blewett-I-90",
+        "snoParks": []
+    },
+    {
+        "snoParkRegion": "Greenwater / Yakima",
+        "snoParkRegionURL": "https://www.parks.wa.gov/465/Greenwater-Yakima",
+        "snoParks": []
+    },
+    {
+        "snoParkRegion": "South Cascades",
+        "snoParkRegionURL": "https://www.parks.wa.gov/614/South-Cascades",
+        "snoParks": []
+    },
+    {
+        "snoParkRegion": "Inland NE /SE",
+        "snoParkRegionURL": "https://www.parks.wa.gov/615/Inland-Northeast-Southeast",
+        "snoParks": []
+    }
+]
