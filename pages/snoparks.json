@@ -6,40 +6,62 @@
             {
                 "snoParkName": "Highlands",
                 "snoParkAddress": "Highlands Sno-Park, Tonasket, WA 98855",
-                "distanceFromSeattle": "5 hours",
-                "webcamLinks": ["https://www.example.com/mtbaker.jpg"],
+                "officialSnoParkURL": "https://highlandsnordicsnopark.com",
+                "distanceFromSeattle": 5,
+                "groomingSchedule": false,
                 "shortGroomingSummary": "Highlands SnoPark grooming does not occur on a fixed schedule, but instead the Highlands Nordic Ski club does condition responsive grooming.",
-                "groomingReportURL": "https://www.example.com/grooming-report.html",
-                "dogFriendly": false,
-                "amountOfMiles": 0
+                "groomingReportURL": "https://highlandsnordicsnopark.com/groomingreport.html",
+                "dogFriendly": true,
+                "dogFriendlyInfo": "Keep dogs to east side of park.",
+                "amountOfKM": 36,
+                "permitRequired": true,
+                "restrooms": true
             },
             {
                 "snoParkName": "Salmon Ridge",
                 "snoParkAddress": "Salmon Ridge Sno-Park, WA-542, Deming, WA 98244",
-                "distanceFromSeattle": "2.75 hours",
-                "webcamLinks": ["https://www.example.com/salmonridge.jpg"],
+                "officialSnoParkURL": "https://www.parks.wa.gov/453/Mount-Baker-Methow#Salmon%20Ridge",
+                "distanceFromSeattle": 2.5,
+                "groomingSchedule": true,
                 "shortGroomingSummary": "Mondays, some Thursdays.",
                 "groomingReportURL": "https://www.nooksacknordicskiclub.org/trails/grooming-and-conditions/",
                 "dogFriendly": false,
-                "amountOfMiles": 0
+                "restrooms": true,
+                "amountOfKM": 30
             },
             {
                 "snoParkName": "Shadow of the Sentinals",
                 "snoParkAddress": "Shadow Of The Sentinels Trailhead, Marblemount, WA 98267",
-                "distanceFromSeattle": "2.75 hours",
-                "webcamLinks": ["https://www.example.com/sentinals.jpg"],
+                "officialSnoParkURL": "https://www.parks.wa.gov/453/Mount-Baker-Methow#Salmon%20Ridge",
+                "distanceFromSeattle": 2,
+                "groomingSchedule": false,
                 "shortGroomingSummary": "This is primarily an ungroomed Sno-Park.",
                 "dogFriendly": true,
-                "amountOfMiles": 0
+                "restrooms": false,
+                "amountOfKM": 0
             },
             {
                 "snoParkName": "South Summit",
                 "snoParkAddress": "South Summit Sno-Park, NF-41, Twisp, WA 98856",
-                "distanceFromSeattle": "2.75 hours",
-                "webcamLinks": ["https://www.example.com/southsummit.jpg"],
+                "distanceFromSeattle": 2.75,
                 "shortGroomingSummary": "This is primarily an ungroomed Sno-Park.",
-                "dogFriendly": true,
-                "amountOfMiles": 0
+                "groomingSchedule": false,
+                "dogFriendly": false,
+                "amountOfKM": 46,
+                "permitRequired": true,
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Pearrygin Lake",
+                "snoParkAddress": "561 Bear Creek Rd, Winthrop, WA 98862",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/13587/Pearrygin-Lake",
+                "distanceFromSeattle": 4.25,
+                "groomingSchedule": false,
+                "shortGroomingSummary": "No classic tracks or skate lanes set",
+                "dogFriendly": false,
+                "amountOfKM": 33,
+                "permitRequired": true,
+                "restrooms": true
             }
         ]
     },
