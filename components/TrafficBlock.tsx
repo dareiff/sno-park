@@ -1,4 +1,5 @@
 import React from "react";
+import styles from "../styles/Home.module.css";
 
 interface DistancePropsI {
     deviceLocation: GeolocationPosition | null;
@@ -6,7 +7,7 @@ interface DistancePropsI {
 }
 
 export default function TrafficBlock(props: DistancePropsI) {
-    const [travelTime, setTravelTime] = React.useState(0);
+    const [travelTime, setTravelTime] = React.useState<number>(0);
 
     const getLatLongFromAddress = async (address: string) => {
         const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
@@ -69,6 +70,10 @@ export default function TrafficBlock(props: DistancePropsI) {
         })
             .then((response) => response.json())
             .then((data) => {
+                const seconds = data.routes
+                    ? data.routes[0].duration.split("s")[0]
+                    : 0;
+                setTravelTime(seconds);
                 console.log(data);
             });
 
@@ -83,18 +88,12 @@ export default function TrafficBlock(props: DistancePropsI) {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.deviceLocation, props.location]);
 
-    const beginLocation =
-        props.deviceLocation !== null
-            ? {
-                  lat: props.deviceLocation.coords.latitude,
-                  lng: props.deviceLocation.coords.longitude,
-              }
-            : {
-                  lat: 47.618538307231326,
-                  lng: -122.30765738317513,
-              };
-
-    const endLocation = props.location;
-
-    return <div></div>;
+    return (
+        <div className={styles.weather}>
+            <h3>Travel Time</h3>
+            <p style={{ textAlign: "center" }}>
+                {(travelTime / 60).toFixed(0)} minutes
+            </p>
+        </div>
+    );
 }
