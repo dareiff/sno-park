@@ -20,8 +20,16 @@ export default function TrafficBlock(props: DistancePropsI) {
             .then((response) => response.json())
             .then((data) => {
                 console.log(data);
+                if (data.results === undefined) {
+                    throw new Error("No results found");
+                } else if (data.results.length === 0) {
+                    throw new Error("No results found");
+                }
                 lat = data.results[0].geometry.location.lat;
                 lng = data.results[0].geometry.location.lng;
+            })
+            .catch((error) => {
+                console.log(error);
             });
 
         return { lat, lng };
@@ -44,39 +52,42 @@ export default function TrafficBlock(props: DistancePropsI) {
             "X-Goog-FieldMask",
             "routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.travelAdvisory"
         );
-        fetch(url, {
-            method: "POST",
-            headers: headers,
-            body: JSON.stringify({
-                origin: {
-                    location: {
-                        latLng: {
-                            latitude: deviceLocation.coords.latitude,
-                            longitude: deviceLocation.coords.longitude,
+        if (lat !== 0 && lng !== 0) {
+            fetch(url, {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify({
+                    origin: {
+                        location: {
+                            latLng: {
+                                latitude: deviceLocation.coords.latitude,
+                                longitude: deviceLocation.coords.longitude,
+                            },
                         },
                     },
-                },
-                destination: {
-                    location: {
-                        latLng: {
-                            latitude: lat,
-                            longitude: lng,
+                    destination: {
+                        location: {
+                            latLng: {
+                                latitude: lat,
+                                longitude: lng,
+                            },
                         },
                     },
-                },
-                travelMode: "DRIVE",
-                routingPreference: "TRAFFIC_AWARE",
-            }),
-        })
-            .then((response) => response.json())
-            .then((data) => {
-                const seconds = data.routes
-                    ? data.routes[0].duration.split("s")[0]
-                    : 0;
-                setTravelTime(seconds);
-                console.log(data);
-            });
-
+                    travelMode: "DRIVE",
+                    routingPreference: "TRAFFIC_AWARE",
+                }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    const seconds = data.routes
+                        ? data.routes[0].duration.split("s")[0]
+                        : 0;
+                    setTravelTime(seconds);
+                    console.log(data);
+                });
+        } else {
+            setTravelTime(0);
+        }
         return 0;
     };
 

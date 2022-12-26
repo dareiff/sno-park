@@ -1,6 +1,6 @@
 import Head from "next/head";
 import Link from "next/link";
-import React, { Suspense } from "react";
+import React from "react";
 import TrafficBlock from "../components/TrafficBlock";
 import WeatherBlock from "../components/WeatherBlock";
 import styles from "../styles/Home.module.css";
@@ -42,6 +42,23 @@ export default function Home() {
                     With a special thanks to Washington State Parks and Rec,
                     WSDOT, groomers, and nordic clubs.
                 </p>
+                <h3>Legend</h3>
+                <div className={styles.legend}>
+                    <div className={styles.legendItem}>
+                        <div className={styles.legendIcon}>
+                            <span title="Dog friendly">🐕‍🦺</span>
+                        </div>
+                        <div className={styles.legendText}>
+                            <span>Dog-friendly</span>
+                        </div>
+                    </div>
+                    <div className={styles.legendItem}>
+                        <span title="Sno park permit required">🪪</span>
+                        <div className={styles.legendText}>
+                            <span>Sno park permit required</span>
+                        </div>
+                    </div>
+                </div>
                 <div className={styles.verticalList}>
                     {snoparks
                         .sort((a, b) => {
@@ -112,16 +129,14 @@ export default function Home() {
                                                             }
                                                         >
                                                             {/* get weather for snopark */}
-                                                            <Suspense>
-                                                                <WeatherBlock
-                                                                    location={
-                                                                        snopark.snoParkAddress
-                                                                    }
-                                                                    deviceLocation={
-                                                                        location
-                                                                    }
-                                                                />
-                                                            </Suspense>
+                                                            <WeatherBlock
+                                                                location={
+                                                                    snopark.snoParkAddress
+                                                                }
+                                                                deviceLocation={
+                                                                    location
+                                                                }
+                                                            />
                                                             <TrafficBlock
                                                                 location={
                                                                     snopark.snoParkAddress
