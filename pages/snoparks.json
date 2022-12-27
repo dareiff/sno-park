@@ -68,7 +68,48 @@
     {
         "snoParkRegion": "Leavenworth / Chelan",
         "snoParkRegionURL": "https://www.parks.wa.gov/457/Leavenworth-Chelan",
-        "snoParks": []
+        "snoParks": [
+            {
+                "snoParkName": "Lake Wenatchee",
+                "snoParkAddress": "Lake Wenatchee State Park, Leavenworth, WA 98826",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/13738/Lake-Wenatchee-grooming-report",
+                "distanceFromSeattle": 2.75,
+                "groomingSchedule": true,
+                "shortGroomingSummary": "Thursday through Monday, mostly.",
+                "groomingReportURL": "https://www.parks.wa.gov/DocumentCenter/View/13738/Lake-Wenatchee-grooming-report",
+                "dogFriendly": true,
+                "amountOfKM": 20,
+                "permitRequired": true,
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Nason Ridge",
+                "snoParkAddress": "Kahler Dr, Leavenworth, WA 98826",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/75/Nason-Ridge-PDF?bidId=",
+                "distanceFromSeattle": 2.75,
+                "groomingSchedule": true,
+                "shortGroomingSummary": "Friday through Sunday",
+                "groomingReportURL": "https://www.parks.wa.gov/DocumentCenter/View/13738/Lake-Wenatchee-grooming-report",
+                "dogFriendly": false,
+                "amountOfKM": 22,
+                "permitRequired": true,
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Chiwawa",
+                "snoParkAddress": "Chiwawa Sno-Park, WA-207, Leavenworth, WA 98826",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/75/Nason-Ridge-PDF?bidId=",
+                "distanceFromSeattle": 3,
+                "groomingSchedule": true,
+                "shortGroomingSummary": "Friday through Sunday",
+                "groomingReportURL": "https://www.parks.wa.gov/DocumentCenter/View/13738/Lake-Wenatchee-grooming-report",
+                "dogFriendly": true,
+                "dogFriendlyInfo": "Dog-friendly after 10am.",
+                "amountOfKM": 43,
+                "permitRequired": true,
+                "restrooms": false
+            }
+        ]
     },
     {
         "snoParkRegion": "Blewett / I-90 / Snoqualmie Pass",
