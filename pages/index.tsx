@@ -49,13 +49,13 @@ export default function Home() {
                             <span title="Dog friendly">🐕‍🦺</span>
                         </div>
                         <div className={styles.legendText}>
-                            <span>Dog-friendly</span>
+                            <span>Dogs OK</span>
                         </div>
                     </div>
                     <div className={styles.legendItem}>
                         <span title="Sno park permit required">🪪</span>
                         <div className={styles.legendText}>
-                            <span>Sno park permit required</span>
+                            <span>Sno park permit</span>
                         </div>
                     </div>
                 </div>
