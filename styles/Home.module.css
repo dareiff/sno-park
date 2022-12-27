@@ -39,16 +39,22 @@
 .legendItem {
     display: flex;
     flex-direction: column;
-    gap: 0.5rem;
     align-items: center;
     border: 3px solid #eaeaea;
     border-radius: 5px;
+    width: 100px;
+    height: 130px;
+    text-align: center;
 }
 
 .legendItem div,
 span {
-    margin: 0.5rem;
+    margin: 0.25rem;
     border-radius: 50%;
+}
+
+.legendIcon {
+    font-size: 3rem;
 }
 
 .footer {

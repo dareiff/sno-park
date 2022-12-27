@@ -48,15 +48,19 @@ export default function Home() {
                         <div className={styles.legendIcon}>
                             <span title="Dog friendly">🐕‍🦺</span>
                         </div>
-                        <div className={styles.legendText}>
-                            <span>Dogs OK</span>
-                        </div>
+                        <div className={styles.legendText}>Dogs OK</div>
                     </div>
                     <div className={styles.legendItem}>
-                        <span title="Sno park permit required">🪪</span>
-                        <div className={styles.legendText}>
-                            <span>Sno park permit</span>
+                        <div className={styles.legendIcon}>
+                            <span title="Sno park permit required">🪪</span>
                         </div>
+                        <div className={styles.legendText}>Sno-park permit</div>
+                    </div>
+                    <div className={styles.legendItem}>
+                        <div className={styles.legendIcon}>
+                            <span title="Toilets available">🚽</span>
+                        </div>
+                        <div className={styles.legendText}>Toilet</div>
                     </div>
                 </div>
                 <div className={styles.verticalList}>

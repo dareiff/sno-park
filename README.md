@@ -38,3 +38,17 @@ yarn dev
 ```
 
 Then, hit up your browser.
+
+
+## TODO
+
+[] Add each park to list
+[] Surface schedule for grooming
+[] Surface amount of trails/groomed trails
+[] Store location in localStorage to prevent asking too much
+[] Set home address?
+[] Ability to *pin* sno-parks to top of page
+
+## Major Todo
+
+[] store weather at server-level, 30 min?
