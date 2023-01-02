@@ -13,6 +13,8 @@ export default function Home() {
         null
     );
 
+    const [parkFilter, setParkFilter] = React.useState<string>("");
+
     React.useEffect(() => {
         // get location data for this device:
         // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
@@ -25,7 +27,7 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Washington State Sno Parks</title>
+                <title>Washington State Sno-Parks</title>
                 <meta
                     title="description"
                     content="A one-stop spot of sno-parks in washington. The aim is to provide very quick links, traffic, weather, and filtering."
@@ -42,6 +44,49 @@ export default function Home() {
                     With a special thanks to Washington State Parks and Rec,
                     WSDOT, groomers, and nordic clubs.
                 </p>
+                <div>
+                    <h3>
+                        Area Filter{" "}
+                        <span
+                            style={{
+                                fontSize: "12px",
+                                marginLeft: "1rem",
+                                cursor: "pointer",
+                            }}
+                            onClick={() => setParkFilter("")}
+                        >
+                            Clear filter
+                        </span>
+                    </h3>
+                    <div className={styles.areaFilterContainer}>
+                        {snoparks.map((snoparkRegion) => {
+                            return (
+                                <button
+                                    key={snoparkRegion.snoParkRegion}
+                                    id={snoparkRegion.snoParkRegion}
+                                    name={snoparkRegion.snoParkRegion}
+                                    value={snoparkRegion.snoParkRegion}
+                                    className={
+                                        styles.filterButton +
+                                        " " +
+                                        (parkFilter.includes(
+                                            snoparkRegion.snoParkRegion
+                                        )
+                                            ? styles.filterButtonActive
+                                            : "")
+                                    }
+                                    onClick={() => {
+                                        setParkFilter(
+                                            snoparkRegion.snoParkRegion
+                                        );
+                                    }}
+                                >
+                                    {snoparkRegion.snoParkRegion}
+                                </button>
+                            );
+                        })}
+                    </div>
+                </div>
                 <h3>Legend</h3>
                 <div className={styles.legend}>
                     <div className={styles.legendItem}>
@@ -65,6 +110,15 @@ export default function Home() {
                 </div>
                 <div className={styles.verticalList}>
                     {snoparks
+                        .filter((snoparkRegion) => {
+                            if (parkFilter === "") {
+                                return true;
+                            } else {
+                                return parkFilter.includes(
+                                    snoparkRegion.snoParkRegion
+                                );
+                            }
+                        })
                         .sort((a, b) => {
                             if (a.snoParkRegion < b.snoParkRegion) {
                                 return -1;
@@ -124,7 +178,8 @@ export default function Home() {
                                                                 {
                                                                     snopark.distanceFromSeattle
                                                                 }{" "}
-                                                                hr (typical)
+                                                                hr drive
+                                                                (typical)
                                                             </span>
                                                         </div>
                                                         <div
@@ -132,6 +187,13 @@ export default function Home() {
                                                                 styles.cardBody
                                                             }
                                                         >
+                                                            {/* amount of KM of trails */}
+                                                            <div>
+                                                                {
+                                                                    snopark.amountOfKM
+                                                                }{" "}
+                                                                KM of trails
+                                                            </div>
                                                             {/* get weather for snopark */}
                                                             <WeatherBlock
                                                                 location={

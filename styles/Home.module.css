@@ -36,6 +36,33 @@
     margin: 0.5rem 0;
 }
 
+.areaFilterContainer {
+    display: flex;
+    flex-direction: row wrap;
+    justify-content: center;
+    gap: 1rem;
+    align-items: center;
+    width: 100%;
+    margin: 0.5rem auto;
+}
+
+.filterButton {
+    border: 1px solid #eaeaea;
+    border-radius: 5px;
+    padding: 0.5rem;
+    cursor: pointer;
+    min-width: 100px;
+}
+
+.filterButton:hover {
+    border: 1px solid #0070f3;
+}
+
+.filterButtonActive {
+    border: 1px solid #0070f3;
+    background-color: #6badf993;
+}
+
 .legendItem {
     display: flex;
     flex-direction: column;
