@@ -251,7 +251,63 @@
     {
         "snoParkRegion": "South Cascades",
         "snoParkRegionURL": "https://www.parks.wa.gov/614/South-Cascades",
-        "snoParks": []
+        "snoParks": [
+            {
+                "snoParkName": "Wakepish",
+                "snoParkAddress": "Wakepish Picnic Area, NF-99, Randle, WA",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/200/Wakepish-PDF?bidId=",
+                "distanceFromSeattle": 3,
+                "groomingSchedule": false,
+                "shortGroomingSummary": "Ungroomed Sno-Park",
+                "groomingReportURL": "",
+                "dogFriendly": false,
+                "dogFriendlyInfo": "",
+                "amountOfKM": 53,
+                "permitRequired": true,
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Marble Mountain",
+                "snoParkAddress": "Sno-Park: Marble Mountain, NF-83, Cougar, WA 98616",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/2282/Marble-Mountain",
+                "distanceFromSeattle": 3.25,
+                "groomingSchedule": false,
+                "shortGroomingSummary": "Ungroomed Sno-Park",
+                "groomingReportURL": "",
+                "dogFriendly": false,
+                "dogFriendlyInfo": "",
+                "amountOfKM": 30,
+                "permitRequired": true,
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Cougar",
+                "snoParkAddress": "Sno-Park: Cougar, Cougar, WA 98616",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/56/Cougar-PDF",
+                "distanceFromSeattle": 3.25,
+                "groomingSchedule": false,
+                "shortGroomingSummary": "Ungroomed Sno-Park",
+                "amountOfKM": 18,
+                "permitRequired": true,
+                "restrooms": true,
+                "dogFriendly": false,
+                "dogFriendlyInfo": ""
+            },
+            {
+                "snoParkName": "Ape Caves",
+                "snoParkAddress": "Ape Cave Interpretive Site, Cougar, WA 98616",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/56/Cougar-PDF?bidId=",
+                "distanceFromSeattle": 3.25,
+                "groomingSchedule": false,
+                "groomingReportURL": "",
+                "shortGroomingSummary": "Ungroomed Sno-Park",
+                "dogFriendly": false,
+                "dogFriendlyInfo": ""
+            },
+            {
+                
+            }
+        ]
     },
     {
         "snoParkRegion": "Inland NE /SE",
