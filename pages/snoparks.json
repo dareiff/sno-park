@@ -6,6 +6,7 @@
             {
                 "snoParkName": "Highlands",
                 "snoParkAddress": "Highlands Sno-Park, Tonasket, WA 98855",
+                "parkingGPS": "",
                 "officialSnoParkURL": "https://highlandsnordicsnopark.com",
                 "distanceFromSeattle": 5,
                 "groomingSchedule": false,

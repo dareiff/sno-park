@@ -38,7 +38,7 @@
 
 .areaFilterContainer {
     display: flex;
-    flex-direction: row wrap;
+    flex-flow: row wrap;
     justify-content: center;
     gap: 1rem;
     align-items: center;
@@ -49,7 +49,7 @@
 .filterButton {
     border: 1px solid #eaeaea;
     border-radius: 5px;
-    padding: 0.5rem;
+    padding: 0.7rem;
     cursor: pointer;
     min-width: 100px;
 }
@@ -95,16 +95,6 @@
 .regionHeader {
     display: inline-block;
     width: auto;
-}
-
-.regionHeader h2::before {
-    content: "🔰";
-    display: block;
-    width: 0;
-    height: 0;
-    top: 0;
-    margin-left: -25px;
-    margin-top: -10px;
 }
 
 .verticalList {
