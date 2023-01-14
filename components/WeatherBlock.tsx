@@ -180,8 +180,10 @@ export default function WeatherBlock(props: WeatherBlockI) {
                         >
                             <span>Snow!</span>
                             <span>
-                                {forecastWeather?.snowAmount &&
-                                    forecastWeather.snowAmount.toFixed(0) + "\""}
+                                {forecastWeather.snowAmount.toFixed(0) === "0"
+                                    ? '< 1"'
+                                    : forecastWeather.snowAmount.toFixed(0) +
+                                      '"'}
                             </span>
                         </div>
                     ) : (

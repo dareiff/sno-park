@@ -19,6 +19,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 ### API dependencies
 
 1. Openweathermap
+   - You need two different keys here; one to get geolocation for an address, the other for actual weather calls
+   - Long-term each parking lot will have a GPS coordinate, but not yet
 2. Google Maps
 
 Get your API keys and put 'em in a `.env.development` file when working locally:
