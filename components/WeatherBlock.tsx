@@ -99,6 +99,7 @@ export default function WeatherBlock(props: WeatherBlockI) {
                 }
             });
         }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [props.location]);
 
     React.useEffect(() => {

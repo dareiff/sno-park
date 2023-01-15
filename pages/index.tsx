@@ -2,7 +2,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
 import styles from '../styles/Home.module.css';
-import { CardBody } from './cardBody';
+import { CardBody } from '../components/cardBody';
 
 import snoparks from './snoparks.json';
 

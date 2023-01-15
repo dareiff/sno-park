@@ -1,9 +1,9 @@
 import Link from 'next/link';
 import React from 'react';
-import TrafficBlock from '../components/TrafficBlock';
-import WeatherBlock from '../components/WeatherBlock';
+import TrafficBlock from './TrafficBlock';
+import WeatherBlock from './WeatherBlock';
 import styles from '../styles/Home.module.css';
-import { SnoParkI, SnoParkRegionI } from './index';
+import { SnoParkI, SnoParkRegionI } from '../pages/index';
 
 interface CardBodyI {
     snopark: SnoParkI;
@@ -13,7 +13,7 @@ interface CardBodyI {
 }
 
 // eslint-disable-next-line no-undef
-export function CardBody(props: CardBodyI) {
+export function CardBody(props: CardBodyI): JSX.Element {
     return (
         <div className={styles.card}>
             <div className={styles.cardHeader}>
