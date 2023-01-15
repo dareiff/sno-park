@@ -49,7 +49,7 @@ export default function Home() {
     return (
         <div className={styles.container}>
             <Head>
-                <title>Washington State Sno-Parks</title>
+                <title>Washington State Sno-Parks Quick Reference</title>
                 <meta
                     title='description'
                     content='A one-stop spot of sno-parks in washington. The aim is to provide very quick links, traffic, weather, and filtering.'
@@ -57,18 +57,15 @@ export default function Home() {
             </Head>
 
             <main className={styles.main}>
-                <h1 className={styles.title}>snoparks.com</h1>
+                <h1 className={styles.title}>sno-park.site</h1>
                 <p>
-                    A one-stop spot of sno-parks in washington. The aim is to
-                    provide very quick links, traffic, weather, and filtering.
-                </p>
-                <p>
-                    With a special thanks to Washington State Parks and Rec,
-                    WSDOT, groomers, and nordic clubs.
+                    Hoping to be a one-stop shop for sno-parks in washington.
+                    The aim is to provide very quick links, traffic, weather,
+                    and filtering.
                 </p>
                 <div>
                     <h3>
-                        Area Filter{' '}
+                        Region Filter{' '}
                         <span
                             style={{
                                 fontSize: '12px',
