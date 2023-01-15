@@ -1,19 +1,37 @@
-import Head from "next/head";
-import Link from "next/link";
-import React from "react";
-import TrafficBlock from "../components/TrafficBlock";
-import WeatherBlock from "../components/WeatherBlock";
-import styles from "../styles/Home.module.css";
-// import snopark json from snoparks.json
-import snoparks from "./snoparks.json";
+import Head from 'next/head';
+import Link from 'next/link';
+import React from 'react';
+import TrafficBlock from '../components/TrafficBlock';
+import WeatherBlock from '../components/WeatherBlock';
+import styles from '../styles/Home.module.css';
+
+import snoparks from './snoparks.json';
+
+export interface SnoParkI {
+    snoParkName: string;
+    snoParkAddress: string;
+    parkingGPS?: string | null;
+    officialSnoParkURL?: string | null;
+    distanceFromSeattle: number;
+    groomingSchedule: boolean;
+    shortGroomingSummary: string;
+    groomingReportURL?: string | null;
+    dogFriendly: boolean | null;
+    dogFriendlyInfo?: string | null;
+    amountOfKM?: number | null;
+    permitRequired?: boolean | null;
+    restrooms?: boolean | null;
+    webcamURL?: string | null;
+}
 
 export default function Home() {
     // use React context to store location data for other components
+    // eslint-disable-next-line no-undef
     const [location, setLocation] = React.useState<null | GeolocationPosition>(
         null
     );
 
-    const [parkFilter, setParkFilter] = React.useState<string>("");
+    const [parkFilter, setParkFilter] = React.useState<string>('');
 
     React.useEffect(() => {
         // get location data for this device:
@@ -29,8 +47,8 @@ export default function Home() {
             <Head>
                 <title>Washington State Sno-Parks</title>
                 <meta
-                    title="description"
-                    content="A one-stop spot of sno-parks in washington. The aim is to provide very quick links, traffic, weather, and filtering."
+                    title='description'
+                    content='A one-stop spot of sno-parks in washington. The aim is to provide very quick links, traffic, weather, and filtering.'
                 />
             </Head>
 
@@ -46,14 +64,14 @@ export default function Home() {
                 </p>
                 <div>
                     <h3>
-                        Area Filter{" "}
+                        Area Filter{' '}
                         <span
                             style={{
-                                fontSize: "12px",
-                                marginLeft: "1rem",
-                                cursor: "pointer",
+                                fontSize: '12px',
+                                marginLeft: '1rem',
+                                cursor: 'pointer',
                             }}
-                            onClick={() => setParkFilter("")}
+                            onClick={() => setParkFilter('')}
                         >
                             Clear filter
                         </span>
@@ -68,12 +86,12 @@ export default function Home() {
                                     value={snoparkRegion.snoParkRegion}
                                     className={
                                         styles.filterButton +
-                                        " " +
+                                        ' ' +
                                         (parkFilter.includes(
                                             snoparkRegion.snoParkRegion
                                         )
                                             ? styles.filterButtonActive
-                                            : "")
+                                            : '')
                                     }
                                     onClick={() => {
                                         setParkFilter(
@@ -91,19 +109,19 @@ export default function Home() {
                 <div className={styles.legend}>
                     <div className={styles.legendItem}>
                         <div className={styles.legendIcon}>
-                            <span title="Dog friendly">🐕‍🦺</span>
+                            <span title='Dog friendly'>🐕‍🦺</span>
                         </div>
                         <div className={styles.legendText}>Dogs OK</div>
                     </div>
                     <div className={styles.legendItem}>
                         <div className={styles.legendIcon}>
-                            <span title="Sno park permit required">🪪</span>
+                            <span title='Sno park permit required'>🪪</span>
                         </div>
                         <div className={styles.legendText}>Sno-park permit</div>
                     </div>
                     <div className={styles.legendItem}>
                         <div className={styles.legendIcon}>
-                            <span title="Toilets available">🚽</span>
+                            <span title='Toilets available'>🚽</span>
                         </div>
                         <div className={styles.legendText}>Toilet</div>
                     </div>
@@ -111,7 +129,7 @@ export default function Home() {
                 <div className={styles.verticalList}>
                     {snoparks
                         .filter((snoparkRegion) => {
-                            if (parkFilter === "") {
+                            if (parkFilter === '') {
                                 return true;
                             } else {
                                 return parkFilter.includes(
@@ -144,7 +162,7 @@ export default function Home() {
                                     </div>
                                     <div className={styles.grid}>
                                         {snoparkRegion.snoParks.map(
-                                            (snopark) => {
+                                            (snopark: SnoParkI) => {
                                                 return (
                                                     <div
                                                         key={
@@ -177,7 +195,7 @@ export default function Home() {
                                                             >
                                                                 {
                                                                     snopark.distanceFromSeattle
-                                                                }{" "}
+                                                                }{' '}
                                                                 hr drive
                                                                 (typical)
                                                             </span>
@@ -191,7 +209,7 @@ export default function Home() {
                                                             <div>
                                                                 {
                                                                     snopark.amountOfKM
-                                                                }{" "}
+                                                                }{' '}
                                                                 KM of trails
                                                             </div>
                                                             {/* get weather for snopark */}
@@ -199,11 +217,18 @@ export default function Home() {
                                                                 location={
                                                                     snopark.snoParkAddress
                                                                 }
-                                                                deviceLocation={
-                                                                    location
+                                                                gpsFromJSON={
+                                                                    snopark.parkingGPS
+                                                                        ? snopark.parkingGPS
+                                                                        : undefined
                                                                 }
                                                             />
                                                             <TrafficBlock
+                                                                gpsFromJSON={
+                                                                    snopark.parkingGPS
+                                                                        ? snopark.parkingGPS
+                                                                        : undefined
+                                                                }
                                                                 location={
                                                                     snopark.snoParkAddress
                                                                 }
@@ -224,17 +249,17 @@ export default function Home() {
                                                                 }
                                                             >
                                                                 {snopark.dogFriendly && (
-                                                                    <span title="Dog friendly">
+                                                                    <span title='Dog friendly'>
                                                                         🐕‍🦺
                                                                     </span>
                                                                 )}
                                                                 {snopark.permitRequired && (
-                                                                    <span title="Sno park permit required">
+                                                                    <span title='Sno park permit required'>
                                                                         🪪
                                                                     </span>
                                                                 )}
                                                                 {snopark.restrooms && (
-                                                                    <span title="Restrooms">
+                                                                    <span title='Restrooms'>
                                                                         🚽
                                                                     </span>
                                                                 )}

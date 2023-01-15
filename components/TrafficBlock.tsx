@@ -1,9 +1,11 @@
-import React from "react";
-import styles from "../styles/Home.module.css";
+import React from 'react';
+import styles from '../styles/Home.module.css';
 
 interface DistancePropsI {
+    // eslint-disable-next-line no-undef
     deviceLocation: GeolocationPosition | null;
     location: string;
+    gpsFromJSON?: string;
 }
 
 export default function TrafficBlock(props: DistancePropsI) {
@@ -21,9 +23,9 @@ export default function TrafficBlock(props: DistancePropsI) {
             .then((data) => {
                 console.log(data);
                 if (data.results === undefined) {
-                    throw new Error("No results found");
+                    throw new Error('No results found');
                 } else if (data.results.length === 0) {
-                    throw new Error("No results found");
+                    throw new Error('No results found');
                 }
                 lat = data.results[0].geometry.location.lat;
                 lng = data.results[0].geometry.location.lng;
@@ -36,25 +38,39 @@ export default function TrafficBlock(props: DistancePropsI) {
     };
 
     const getTravelTime = async (
+        // eslint-disable-next-line no-undef
         deviceLocation: GeolocationPosition,
         location: string
     ) => {
         const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
-        const { lat, lng } = await getLatLongFromAddress(location);
+        let lat, lng;
+        if (
+            props.gpsFromJSON !== '' &&
+            props.gpsFromJSON !== undefined &&
+            props.gpsFromJSON !== null
+        ) {
+            lat = parseFloat(props.gpsFromJSON.split(', ')[0]);
+            lng = parseFloat(props.gpsFromJSON.split(', ')[1]);
+        } else {
+            const latLng = await getLatLongFromAddress(location);
+            lat = latLng.lat;
+            lng = latLng.lng;
+        }
+
         const url = `https://routes.googleapis.com/directions/v2:computeRoutes`;
         const headers = new Headers();
-        headers.append("Content-Type", "application/json");
+        headers.append('Content-Type', 'application/json');
         headers.append(
-            "X-Goog-Api-Key",
-            googleMapsApiKey ? googleMapsApiKey : ""
+            'X-Goog-Api-Key',
+            googleMapsApiKey ? googleMapsApiKey : ''
         );
         headers.append(
-            "X-Goog-FieldMask",
-            "routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.travelAdvisory"
+            'X-Goog-FieldMask',
+            'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.travelAdvisory'
         );
         if (lat !== 0 && lng !== 0) {
             fetch(url, {
-                method: "POST",
+                method: 'POST',
                 headers: headers,
                 body: JSON.stringify({
                     origin: {
@@ -73,14 +89,14 @@ export default function TrafficBlock(props: DistancePropsI) {
                             },
                         },
                     },
-                    travelMode: "DRIVE",
-                    routingPreference: "TRAFFIC_AWARE",
+                    travelMode: 'DRIVE',
+                    routingPreference: 'TRAFFIC_AWARE',
                 }),
             })
                 .then((response) => response.json())
                 .then((data) => {
                     const seconds = data.routes
-                        ? data.routes[0].duration.split("s")[0]
+                        ? data.routes[0].duration.split('s')[0]
                         : 0;
                     setTravelTime(seconds);
                     console.log(data);
@@ -92,7 +108,7 @@ export default function TrafficBlock(props: DistancePropsI) {
     };
 
     React.useEffect(() => {
-        if (props.deviceLocation === null || props.location === "") {
+        if (props.deviceLocation === null || props.location === '') {
             return;
         }
         getTravelTime(props.deviceLocation, props.location);
@@ -102,7 +118,7 @@ export default function TrafficBlock(props: DistancePropsI) {
     return (
         <div className={styles.weather}>
             <h3>Travel Time</h3>
-            <p style={{ textAlign: "center" }}>
+            <p style={{ textAlign: 'center' }}>
                 {(travelTime / 60).toFixed(0)} minutes
             </p>
         </div>

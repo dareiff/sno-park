@@ -1,53 +1,53 @@
 /* eslint-disable @next/next/no-img-element */
 // A component that displays the current weather and weather forecast for next 2 and 6 hours for a given SnoPark. This component is used in the SnoParkCard component.
-import React from "react";
-import styles from "../styles/Home.module.css";
+import React from 'react';
+import styles from '../styles/Home.module.css';
 
 interface WeatherBlockI {
     location: string;
-    deviceLocation: GeolocationPosition | null;
+    gpsFromJSON?: string;
 }
 
 const matchWeatherIcon = (icon: string) => {
-    let matching_weather_icon = "";
-    if (icon == "01d") {
-        matching_weather_icon = "clear";
-    } else if (icon == "01n") {
-        matching_weather_icon = "nt_sunny";
-    } else if (icon == "02d") {
-        matching_weather_icon = "partlycloudy";
-    } else if (icon == "02n") {
-        matching_weather_icon = "nt_partlycloudy";
-    } else if (icon == "03d") {
-        matching_weather_icon = "cloudy";
-    } else if (icon == "03n") {
-        matching_weather_icon = "nt_cloudy";
-    } else if (icon == "04d") {
-        matching_weather_icon = "mostlycloudy";
-    } else if (icon == "04n") {
-        matching_weather_icon = "nt_mostlycloudy";
-    } else if (icon == "09d") {
-        matching_weather_icon = "chancerain";
-    } else if (icon == "09n") {
-        matching_weather_icon = "nt_chancerain";
-    } else if (icon == "10d") {
-        matching_weather_icon = "rain";
-    } else if (icon == "10n") {
-        matching_weather_icon = "nt_rain";
-    } else if (icon == "11d") {
-        matching_weather_icon = "tstorms";
-    } else if (icon == "11n") {
-        matching_weather_icon = "nt_tstorms";
-    } else if (icon == "13d") {
-        matching_weather_icon = "snow";
-    } else if (icon == "13n") {
-        matching_weather_icon = "nt_snow";
-    } else if (icon == "50d") {
-        matching_weather_icon = "fog";
-    } else if (icon == "50n") {
-        matching_weather_icon = "nt_fog";
+    let matching_weather_icon = '';
+    if (icon == '01d') {
+        matching_weather_icon = 'clear';
+    } else if (icon == '01n') {
+        matching_weather_icon = 'nt_sunny';
+    } else if (icon == '02d') {
+        matching_weather_icon = 'partlycloudy';
+    } else if (icon == '02n') {
+        matching_weather_icon = 'nt_partlycloudy';
+    } else if (icon == '03d') {
+        matching_weather_icon = 'cloudy';
+    } else if (icon == '03n') {
+        matching_weather_icon = 'nt_cloudy';
+    } else if (icon == '04d') {
+        matching_weather_icon = 'mostlycloudy';
+    } else if (icon == '04n') {
+        matching_weather_icon = 'nt_mostlycloudy';
+    } else if (icon == '09d') {
+        matching_weather_icon = 'chancerain';
+    } else if (icon == '09n') {
+        matching_weather_icon = 'nt_chancerain';
+    } else if (icon == '10d') {
+        matching_weather_icon = 'rain';
+    } else if (icon == '10n') {
+        matching_weather_icon = 'nt_rain';
+    } else if (icon == '11d') {
+        matching_weather_icon = 'tstorms';
+    } else if (icon == '11n') {
+        matching_weather_icon = 'nt_tstorms';
+    } else if (icon == '13d') {
+        matching_weather_icon = 'snow';
+    } else if (icon == '13n') {
+        matching_weather_icon = 'nt_snow';
+    } else if (icon == '50d') {
+        matching_weather_icon = 'fog';
+    } else if (icon == '50n') {
+        matching_weather_icon = 'nt_fog';
     } else {
-        matching_weather_icon = "clear";
+        matching_weather_icon = 'clear';
     }
     return `weather_icons/${matching_weather_icon}.svg`;
 };
@@ -60,9 +60,6 @@ export default function WeatherBlock(props: WeatherBlockI) {
         snowInSixHours?: boolean;
         snowAmount?: number;
     }
-
-    //get current device coordinates
-    const location = React.useRef<null | GeolocationPosition>(null);
 
     const [currentWeather, setCurrentWeather] =
         React.useState<null | CurrentWeatherI>(null);
@@ -96,10 +93,14 @@ export default function WeatherBlock(props: WeatherBlockI) {
                 )
                     .then((response) => response.json())
                     .then((data) => {
-                        setCurrentWeather({
-                            temp: data.main.temp.toFixed(0),
-                            icon: data.weather[0].icon,
-                        });
+                        if (data.main) {
+                            setCurrentWeather({
+                                temp: data.main.temp.toFixed(0),
+                                icon: data.weather[0].icon,
+                            });
+                        } else {
+                            console.log('No weather data');
+                        }
                     })
                     .catch((error) => {
                         console.error(error);
@@ -113,12 +114,17 @@ export default function WeatherBlock(props: WeatherBlockI) {
                         let snowAmount = 0;
 
                         for (let i = 0; i < 2; i++) {
-                            if ("snow" in data.list[i]) {
+                            if (data.list === undefined) {
+                                console.log('No weather data', props.location);
+                                return;
+                            }
+                            // TODO: data.list might be undefined
+                            if ('snow' in data.list[i]) {
                                 snow = true;
-                                snowAmount += data.list[i].snow["3h"];
+                                snowAmount += data.list[i].snow['3h'];
                                 console.log(
-                                    "SNOW amount:",
-                                    data.list[i].snow["3h"] + " inches",
+                                    'SNOW amount:',
+                                    data.list[i].snow['3h'] + ' inches',
                                     snowAmount
                                 );
                             }
@@ -148,18 +154,18 @@ export default function WeatherBlock(props: WeatherBlockI) {
                 <div className={styles.weatherBlockCurrent}>
                     <span>Now:</span>
                     <div className={styles.weatherBlockCurrentTemp}>
-                        {currentWeather ? `${currentWeather.temp}°` : "Loading"}
+                        {currentWeather ? `${currentWeather.temp}°` : 'Loading'}
                     </div>
                     <div className={styles.weatherBlockCurrentIcon}>
                         {currentWeather ? (
                             <img
-                                alt="weather icon"
+                                alt='weather icon'
                                 src={matchWeatherIcon(currentWeather.icon)}
                                 width={50}
                                 height={50}
                             />
                         ) : (
-                            "Loading"
+                            'Loading'
                         )}
                     </div>
                 </div>
@@ -171,16 +177,16 @@ export default function WeatherBlock(props: WeatherBlockI) {
                             style={
                                 forecastWeather?.snowAmount > 1
                                     ? {
-                                          borderStyle: "dashed",
+                                          borderStyle: 'dashed',
                                       }
                                     : {
-                                          borderStyle: "solid",
+                                          borderStyle: 'solid',
                                       }
                             }
                         >
                             <span>Snow!</span>
                             <span>
-                                {forecastWeather.snowAmount.toFixed(0) === "0"
+                                {forecastWeather.snowAmount.toFixed(0) === '0'
                                     ? '< 1"'
                                     : forecastWeather.snowAmount.toFixed(0) +
                                       '"'}
@@ -195,18 +201,18 @@ export default function WeatherBlock(props: WeatherBlockI) {
                     <div className={styles.weatherBlockCurrentTemp}>
                         {forecastWeather
                             ? `${forecastWeather.temp}°`
-                            : "Loading"}
+                            : 'Loading'}
                     </div>
                     <div className={styles.weatherBlockCurrentIcon}>
                         {forecastWeather ? (
                             <img
-                                alt="weather icon"
+                                alt='weather icon'
                                 src={matchWeatherIcon(forecastWeather.icon)}
                                 width={50}
                                 height={50}
                             />
                         ) : (
-                            "Loading"
+                            'Loading'
                         )}
                     </div>
                 </div>

@@ -6,7 +6,7 @@
             {
                 "snoParkName": "Highlands",
                 "snoParkAddress": "Highlands Sno-Park, Tonasket, WA 98855",
-                "parkingGPS": "",
+                "parkingGPS": "48.80399029489802, -119.20495502026561",
                 "officialSnoParkURL": "https://highlandsnordicsnopark.com",
                 "distanceFromSeattle": 5,
                 "groomingSchedule": false,
@@ -21,6 +21,7 @@
             {
                 "snoParkName": "Salmon Ridge",
                 "snoParkAddress": "Salmon Ridge Sno-Park, WA-542, Deming, WA 98244",
+                "parkingGPS": "48.90345847815185, -121.69468527672561",
                 "officialSnoParkURL": "https://www.parks.wa.gov/453/Mount-Baker-Methow#Salmon%20Ridge",
                 "distanceFromSeattle": 2.5,
                 "groomingSchedule": true,
@@ -33,12 +34,14 @@
             {
                 "snoParkName": "Shadow of the Sentinals",
                 "snoParkAddress": "Shadow Of The Sentinels Trailhead, Marblemount, WA 98267",
-                "officialSnoParkURL": "https://www.parks.wa.gov/453/Mount-Baker-Methow#Salmon%20Ridge",
+                "parkingGPS": "48.66925802780003, -121.7162000402823",
+                "officialSnoParkURL": "https://www.parks.wa.gov/453/Mount-Baker-Methow",
                 "distanceFromSeattle": 2,
                 "groomingSchedule": false,
                 "shortGroomingSummary": "This is primarily an ungroomed Sno-Park.",
                 "dogFriendly": true,
                 "restrooms": false,
+                "permitRequired": false,
                 "amountOfKM": 0
             },
             {
@@ -119,6 +122,7 @@
             {
                 "snoParkName": "Hyak",
                 "snoParkAddress": "Iron Horse State Park - Hyak Trailhead, Iron Horse Trail, Snoqualmie Pass, WA 98068",
+                "parkingGPS": "47.3915683098664, -121.39221593025752",
                 "officialSnoParkURL": "https://www.snowrec.org/hyak",
                 "distanceFromSeattle": 1,
                 "groomingSchedule": true,
@@ -256,6 +260,7 @@
             {
                 "snoParkName": "Wakepish",
                 "snoParkAddress": "Wakepish Picnic Area, NF-99, Randle, WA",
+                "parkingGPS": "46.32545355048112, -121.97529330105581",
                 "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/200/Wakepish-PDF?bidId=",
                 "distanceFromSeattle": 3,
                 "groomingSchedule": false,
@@ -310,6 +315,96 @@
     {
         "snoParkRegion": "Inland NE /SE",
         "snoParkRegionURL": "https://www.parks.wa.gov/615/Inland-Northeast-Southeast",
-        "snoParks": []
+        "snoParks": [
+            {
+                "snoParkName": "Deer Creek Nordic",
+                "snoParkAddress": "",
+                "officialSnoParkURL": "https://www.parks.wa.gov/DocumentCenter/View/8460/Deer-Creek-Nordic-?bidId=",
+                "parkingGPS": "48.86480886330623, -118.39712630826905",
+                "distanceFromSeattle": 6,
+                "groomingSchedule": true,
+                "shortGroomingSummary": "Alternating: Monday & Thursday; then Tuesday & Friday",
+                "groomingReportURL": "https://www.parks.wa.gov/DocumentCenter/View/19881/Three-Rivers-RD-Grooming-Calendar-2022-2023",
+                "dogFriendly": true,
+                "dogFriendlyInfo": "Dogs OK",
+                "amountOfKM": 9,
+                "permitRequired": true,
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Frater Lake",
+                "snoParkAddress": "",
+                "shortGroomingSummary": "Alternating: Tuesday & Friday; then Monday & Thursday",
+                "officialSnoParkURL": "https://www.parks.wa.gov/615/Inland-Northeast-Southeast",
+                "parkingGPS": "48.65462917217667, -117.48497198467612",
+                "distanceFromSeattle": 5.75,
+                "groomingSchedule": true,
+                "groomingReportURL": "https://www.parks.wa.gov/DocumentCenter/View/19881/Three-Rivers-RD-Grooming-Calendar-2022-2023",
+                "dogFriendly": null,
+                "dogFriendlyInfo": "",
+                "amountOfKM": 16,
+                "permitRequired": true,
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Sherman Pass",
+                "snoParkAddress": "",
+                "shortGroomingSummary": "This is primarily an ungroomed Sno-Park.",
+                "officialSnoParkURL": "https://www.parks.wa.gov/615/Inland-Northeast-Southeast",
+                "parkingGPS": "48.60740605023092, -118.47855709524104",
+                "distanceFromSeattle": 5.5,
+                "groomingSchedule": false,
+                "dogFriendly": null,
+                "dogFriendlyInfo": "",
+                "amountOfKM": 20,
+                "permitRequired": true,
+                "restrooms": false
+            },
+            {
+                "snoParkName": "Geophysical",
+                "snoParkAddress": "",
+                "shortGroomingSummary": "Occasional.",
+                "officialSnoParkURL": "https://www.parks.wa.gov/615/Inland-Northeast-Southeast",
+                "parkingGPS": "48.25386467634129, -117.1212651289843",
+                "distanceFromSeattle": 5.25,
+                "groomingSchedule": true,
+                "dogFriendly": null,
+                "dogFriendlyInfo": "",
+                "amountOfKM": 11,
+                "permitRequired": true,
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Mount Spokane",
+                "snoParkAddress": "",
+                "shortGroomingSummary": "Numerous trails are groomed on a rotating schedule.",
+                "officialSnoParkURL": "https://www.parks.wa.gov/615/Inland-Northeast-Southeast",
+                "parkingGPS": "48.25386467634129, -117.1212651289843",
+                "distanceFromSeattle": 5.25,
+                "groomingSchedule": true,
+                "dogFriendly": true,
+                "dogFriendlyInfo": "Dogs must be on a harness and attached to a human at all times.",
+                "groomingReportURL": "https://nordic-pulse.com/ski-areas/US/WA/Mount-Spokane",
+                "amountOfKM": 50,
+                "permitRequired": true,
+                "webcamURL": "https://biz.parks.wa.gov/webcams/selkirklodge1.jpg",
+                "restrooms": true
+            },
+            {
+                "snoParkName": "Fields Spring",
+                "snoParkAddress": "",
+                "shortGroomingSummary": "Tuesday and Friday; alternating trails.",
+                "officialSnoParkURL": "https://www.parks.wa.gov/615/Inland-Northeast-Southeast",
+                "parkingGPS": "46.08124617471648, -117.16796408031757",
+                "distanceFromSeattle": 5.75,
+                "groomingSchedule": true,
+                "dogFriendly": null,
+                "dogFriendlyInfo": "",
+                "groomingReportURL": "https://www.parks.wa.gov/DocumentCenter/View/14580/Fields-Spring-Grooming-Calendar-2022-2023",
+                "amountOfKM": 9,
+                "permitRequired": true,
+                "restrooms": true
+            }
+        ]
     }
 ]
