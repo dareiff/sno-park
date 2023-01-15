@@ -3,9 +3,9 @@ import styles from '../styles/Home.module.css';
 
 interface DistancePropsI {
     // eslint-disable-next-line no-undef
-    deviceLocation: GeolocationPosition | null;
+    deviceLocation: GeolocationPosition['coords'] | null;
     location: string;
-    gpsFromJSON?: string;
+    gps?: string;
 }
 
 export default function TrafficBlock(props: DistancePropsI) {
@@ -39,18 +39,14 @@ export default function TrafficBlock(props: DistancePropsI) {
 
     const getTravelTime = async (
         // eslint-disable-next-line no-undef
-        deviceLocation: GeolocationPosition,
+        deviceLocation: GeolocationPosition['coords'],
         location: string
     ) => {
         const googleMapsApiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY;
         let lat, lng;
-        if (
-            props.gpsFromJSON !== '' &&
-            props.gpsFromJSON !== undefined &&
-            props.gpsFromJSON !== null
-        ) {
-            lat = parseFloat(props.gpsFromJSON.split(', ')[0]);
-            lng = parseFloat(props.gpsFromJSON.split(', ')[1]);
+        if (props.gps !== '' && props.gps !== undefined && props.gps !== null) {
+            lat = parseFloat(props.gps.split(', ')[0]);
+            lng = parseFloat(props.gps.split(', ')[1]);
         } else {
             const latLng = await getLatLongFromAddress(location);
             lat = latLng.lat;
@@ -68,6 +64,7 @@ export default function TrafficBlock(props: DistancePropsI) {
             'X-Goog-FieldMask',
             'routes.duration,routes.distanceMeters,routes.polyline.encodedPolyline,routes.travelAdvisory'
         );
+
         if (lat !== 0 && lng !== 0) {
             fetch(url, {
                 method: 'POST',
@@ -76,8 +73,8 @@ export default function TrafficBlock(props: DistancePropsI) {
                     origin: {
                         location: {
                             latLng: {
-                                latitude: deviceLocation.coords.latitude,
-                                longitude: deviceLocation.coords.longitude,
+                                latitude: deviceLocation.latitude,
+                                longitude: deviceLocation.longitude,
                             },
                         },
                     },
@@ -107,20 +104,33 @@ export default function TrafficBlock(props: DistancePropsI) {
         return 0;
     };
 
-    React.useEffect(() => {
-        if (props.deviceLocation === null || props.location === '') {
-            return;
-        }
-        getTravelTime(props.deviceLocation, props.location);
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.deviceLocation, props.location]);
-
-    return (
-        <div className={styles.weather}>
-            <h3>Travel Time</h3>
-            <p style={{ textAlign: 'center' }}>
-                {(travelTime / 60).toFixed(0)} minutes
-            </p>
-        </div>
-    );
+    if (travelTime === 0 && props.deviceLocation !== null) {
+        return (
+            <div className={styles.weather}>
+                <button
+                    className={styles.button}
+                    onClick={() =>
+                        getTravelTime(
+                            // eslint-disable-next-line no-undef
+                            props.deviceLocation as GeolocationPosition['coords'],
+                            props.location
+                        )
+                    }
+                >
+                    Check travel time?
+                </button>
+            </div>
+        );
+    } else if (travelTime !== 0) {
+        return (
+            <div className={styles.weather}>
+                <h3>Travel Time</h3>
+                <p style={{ textAlign: 'center' }}>
+                    {(travelTime / 60).toFixed(0)} minutes
+                </p>
+            </div>
+        );
+    } else {
+        return <></>;
+    }
 }

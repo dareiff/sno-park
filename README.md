@@ -6,11 +6,11 @@ Instead, this is turning into more of a handy website to consult the morning-of.
 
 What it might be good for:
 
--   current drive-time to each park
--   see how many miles are available
--   filter by day-last-groomed
--   filter by groomed/ungroomed
--   ???
+- current drive-time to each park
+- see how many miles are available
+- filter by day-last-groomed
+- filter by groomed/ungroomed
+- ???
 
 ## Live in Washington and want to help?
 
@@ -43,16 +43,16 @@ Then, hit up your browser.
 
 ## TODO
 
--   Finish adding each park to list
--   Surface schedule for grooming
--   Store location in localStorage to prevent asking too much
--   Set home address?
--   Ability to _pin_ sno-parks to top of page
+- Finish adding each park to list
+- Surface schedule for grooming
+- Store location in localStorage to prevent asking too much
+- Set home address?
+- Ability to _pin_ sno-parks to top of page
 
 ## Major Todo
 
--   store weather at server-level, 30 min?
-    -   If any more than 10 people use it right now, we'll far exceeed the weather API calls
+- store weather at server-level, 30 min?
+    - If any more than 10 people use it right now, we'll far exceeed the weather API calls
 
 ## Regions not finished
 

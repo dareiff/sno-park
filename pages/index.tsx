@@ -1,9 +1,8 @@
 import Head from 'next/head';
 import Link from 'next/link';
 import React from 'react';
-import TrafficBlock from '../components/TrafficBlock';
-import WeatherBlock from '../components/WeatherBlock';
 import styles from '../styles/Home.module.css';
+import { CardBody } from './cardBody';
 
 import snoparks from './snoparks.json';
 
@@ -24,23 +23,28 @@ export interface SnoParkI {
     webcamURL?: string | null;
 }
 
+export interface SnoParkRegionI {
+    snoParkRegion: string;
+    snoParkRegionURL: string;
+    snoParks: SnoParkI[];
+}
+
 export default function Home() {
     // use React context to store location data for other components
-    // eslint-disable-next-line no-undef
-    const [location, setLocation] = React.useState<null | GeolocationPosition>(
-        null
-    );
+    const [location, setLocation] = React.useState<
+        // eslint-disable-next-line no-undef
+        null | GeolocationPosition['coords']
+    >(null);
 
     const [parkFilter, setParkFilter] = React.useState<string>('');
 
     React.useEffect(() => {
-        // get location data for this device:
-        // https://developer.mozilla.org/en-US/docs/Web/API/Geolocation_API
-
-        navigator.geolocation.getCurrentPosition((location) =>
-            setLocation(location)
-        );
-    }, []);
+        navigator.geolocation.getCurrentPosition((location) => {
+            if (location !== null) {
+                setLocation(location.coords);
+            }
+        });
+    }, [location]);
 
     return (
         <div className={styles.container}>
@@ -77,7 +81,7 @@ export default function Home() {
                         </span>
                     </h3>
                     <div className={styles.areaFilterContainer}>
-                        {snoparks.map((snoparkRegion) => {
+                        {snoparks.map((snoparkRegion: SnoParkRegionI) => {
                             return (
                                 <button
                                     key={snoparkRegion.snoParkRegion}
@@ -146,7 +150,7 @@ export default function Home() {
                             }
                             return 0;
                         })
-                        .map((snoparkRegion) => {
+                        .map((snoparkRegion: SnoParkRegionI) => {
                             return (
                                 <div key={snoparkRegion.snoParkRegion}>
                                     <div className={styles.regionHeader}>
@@ -164,125 +168,16 @@ export default function Home() {
                                         {snoparkRegion.snoParks.map(
                                             (snopark: SnoParkI) => {
                                                 return (
-                                                    <div
+                                                    <CardBody
                                                         key={
                                                             snopark.snoParkName
                                                         }
-                                                        className={styles.card}
-                                                    >
-                                                        <div
-                                                            className={
-                                                                styles.cardHeader
-                                                            }
-                                                        >
-                                                            <Link
-                                                                href={
-                                                                    snopark.officialSnoParkURL
-                                                                        ? snopark.officialSnoParkURL
-                                                                        : snoparkRegion.snoParkRegionURL
-                                                                }
-                                                            >
-                                                                <h3>
-                                                                    {
-                                                                        snopark.snoParkName
-                                                                    }
-                                                                </h3>
-                                                            </Link>
-                                                            <span
-                                                                className={
-                                                                    styles.drivetime
-                                                                }
-                                                            >
-                                                                {
-                                                                    snopark.distanceFromSeattle
-                                                                }{' '}
-                                                                hr drive
-                                                                (typical)
-                                                            </span>
-                                                        </div>
-                                                        <div
-                                                            className={
-                                                                styles.cardBody
-                                                            }
-                                                        >
-                                                            {/* amount of KM of trails */}
-                                                            <div>
-                                                                {
-                                                                    snopark.amountOfKM
-                                                                }{' '}
-                                                                KM of trails
-                                                            </div>
-                                                            {/* get weather for snopark */}
-                                                            <WeatherBlock
-                                                                location={
-                                                                    snopark.snoParkAddress
-                                                                }
-                                                                gpsFromJSON={
-                                                                    snopark.parkingGPS
-                                                                        ? snopark.parkingGPS
-                                                                        : undefined
-                                                                }
-                                                            />
-                                                            <TrafficBlock
-                                                                gpsFromJSON={
-                                                                    snopark.parkingGPS
-                                                                        ? snopark.parkingGPS
-                                                                        : undefined
-                                                                }
-                                                                location={
-                                                                    snopark.snoParkAddress
-                                                                }
-                                                                deviceLocation={
-                                                                    location
-                                                                }
-                                                            />
-                                                        </div>
-                                                        <div
-                                                            className={
-                                                                styles.weather
-                                                            }
-                                                        >
-                                                            <h3>Legend</h3>
-                                                            <div
-                                                                className={
-                                                                    styles.cardIcons
-                                                                }
-                                                            >
-                                                                {snopark.dogFriendly && (
-                                                                    <span title='Dog friendly'>
-                                                                        🐕‍🦺
-                                                                    </span>
-                                                                )}
-                                                                {snopark.permitRequired && (
-                                                                    <span title='Sno park permit required'>
-                                                                        🪪
-                                                                    </span>
-                                                                )}
-                                                                {snopark.restrooms && (
-                                                                    <span title='Restrooms'>
-                                                                        🚽
-                                                                    </span>
-                                                                )}
-                                                            </div>
-                                                        </div>
-
-                                                        <div
-                                                            className={
-                                                                styles.cardFooter
-                                                            }
-                                                        >
-                                                            <h3>
-                                                                <Link
-                                                                    href={
-                                                                        `https://maps.google.com/?q=` +
-                                                                        snopark.snoParkAddress
-                                                                    }
-                                                                >
-                                                                    Directions!
-                                                                </Link>
-                                                            </h3>
-                                                        </div>
-                                                    </div>
+                                                        location={location}
+                                                        snopark={snopark}
+                                                        snoparkRegion={
+                                                            snoparkRegion
+                                                        }
+                                                    />
                                                 );
                                             }
                                         )}

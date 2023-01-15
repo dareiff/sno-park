@@ -5,7 +5,7 @@ import styles from '../styles/Home.module.css';
 
 interface WeatherBlockI {
     location: string;
-    gpsFromJSON?: string;
+    gps?: string;
 }
 
 const matchWeatherIcon = (icon: string) => {
@@ -52,96 +52,113 @@ const matchWeatherIcon = (icon: string) => {
     return `weather_icons/${matching_weather_icon}.svg`;
 };
 
+const getLatLongFromZip = async (geourl: string): Promise<any> => {
+    let lat, lon;
+    await fetch(geourl)
+        .then((response) => response.json())
+        .then((data) => {
+            lat = data.lat;
+            lon = data.lon;
+        })
+        .catch((error) => {
+            console.error(error);
+        });
+    return { lat, lon };
+};
+
 export default function WeatherBlock(props: WeatherBlockI) {
-    // rough sketch of the currentWeather object/interface
     interface CurrentWeatherI {
         temp: number;
         icon: string;
         snowInSixHours?: boolean;
         snowAmount?: number;
     }
+    const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_GEO_API_KEY;
+    const apiKeyTwo = process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY;
 
+    const propLat = props.gps !== undefined ? props.gps.split(', ')[0] : '';
+    const propLon = props.gps !== undefined ? props.gps.split(', ')[1] : '';
     const [currentWeather, setCurrentWeather] =
         React.useState<null | CurrentWeatherI>(null);
     const [forecastWeather, setForecastWeather] =
         React.useState<null | CurrentWeatherI>(null);
 
+    const [latLong, setLatLong] = React.useState<{ lat: string; lon: string }>({
+        lat: propLat,
+        lon: propLon,
+    });
+
     React.useEffect(() => {
-        //Get the weather for current location
-        let lat = 0;
-        let lon = 0;
+        if (latLong.lat === '' && props.location.length > 5) {
+            const geourl = `https://api.openweathermap.org/geo/1.0/zip?zip=${props.location.substring(
+                props.location.length - 5
+            )}&limit=1&appid=${apiKey}`;
+            getLatLongFromZip(geourl).then((data) => {
+                if (data !== undefined) {
+                    setLatLong({ lat: data.lat, lon: data.lon });
+                }
+            });
+        }
+    }, [props.location]);
 
-        // get the weather for the snopark using openweathermap
-        const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_GEO_API_KEY;
-        const apiKeyTwo = process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY;
-        console.log(apiKey);
-        //get geocoded location from openweathermap
-        const geourl = `https://api.openweathermap.org/geo/1.0/zip?zip=${props.location.substring(
-            props.location.length - 5
-        )}&limit=1&appid=${apiKey}`;
-
-        fetch(geourl)
+    React.useEffect(() => {
+        if (latLong.lat === '') {
+            return;
+        }
+        fetch(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${latLong.lat}&lon=${latLong.lon}&units=imperial&appid=${apiKeyTwo}`
+        )
             .then((response) => response.json())
             .then((data) => {
-                console.log(data);
-                lat = data.lat;
-                lon = data.lon;
+                if (data.main) {
+                    setCurrentWeather({
+                        temp: data.main.temp.toFixed(0),
+                        icon: data.weather[0].icon,
+                    });
+                } else {
+                    // console.log('No weather data');
+                }
             })
-            .then(() => {
-                fetch(
-                    `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKeyTwo}`
-                )
-                    .then((response) => response.json())
-                    .then((data) => {
-                        if (data.main) {
-                            setCurrentWeather({
-                                temp: data.main.temp.toFixed(0),
-                                icon: data.weather[0].icon,
-                            });
-                        } else {
-                            console.log('No weather data');
-                        }
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
-                fetch(
-                    `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&units=imperial&appid=${apiKeyTwo}`
-                )
-                    .then((response) => response.json())
-                    .then((data) => {
-                        let snow = false;
-                        let snowAmount = 0;
-
-                        for (let i = 0; i < 2; i++) {
-                            if (data.list === undefined) {
-                                console.log('No weather data', props.location);
-                                return;
-                            }
-                            // TODO: data.list might be undefined
-                            if ('snow' in data.list[i]) {
-                                snow = true;
-                                snowAmount += data.list[i].snow['3h'];
-                                console.log(
-                                    'SNOW amount:',
-                                    data.list[i].snow['3h'] + ' inches',
-                                    snowAmount
-                                );
-                            }
-                        }
-                        setForecastWeather({
-                            temp: data.list[2].main.temp.toFixed(0),
-                            icon: data.list[2].weather[0].icon,
-                            snowInSixHours: snow,
-                            snowAmount: snowAmount,
-                        });
-                        console.log(snowAmount);
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+            .catch((error) => {
+                console.error(error);
             });
-    }, [props.location]);
+
+        fetch(
+            `https://api.openweathermap.org/data/2.5/forecast?lat=${latLong.lat}&lon=${latLong.lon}&units=imperial&appid=${apiKeyTwo}`
+        )
+            .then((response) => response.json())
+            .then((data) => {
+                let snow = false;
+                let snowAmount = 0;
+
+                for (let i = 0; i < 2; i++) {
+                    if (data.list === undefined) {
+                        // console.log('No weather data', props.location);
+                        return;
+                    }
+                    // TODO: data.list might be undefined
+                    if ('snow' in data.list[i]) {
+                        snow = true;
+                        snowAmount += data.list[i].snow['3h'];
+                        // console.log(
+                        //     'SNOW amount:',
+                        //     data.list[i].snow['3h'] + ' inches',
+                        //     snowAmount
+                        // );
+                    }
+                }
+                setForecastWeather({
+                    temp: data.list[2].main.temp.toFixed(0),
+                    icon: data.list[2].weather[0].icon,
+                    snowInSixHours: snow,
+                    snowAmount: snowAmount,
+                });
+                // console.log(snowAmount);
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }, [props.location, latLong, apiKeyTwo]);
 
     if (currentWeather === null) {
         return null;
