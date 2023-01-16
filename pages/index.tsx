@@ -185,7 +185,17 @@ export default function Home() {
                 </div>
             </main>
 
-            <footer className={styles.footer}></footer>
+            <footer className={styles.footer}>
+                <p>
+                    <a href='https://www.fun-club.xyz'>by Fun Club</a>
+                </p>
+                <p>
+                    Help out{' '}
+                    <a href='https://github.com/dareiff/wa-sno-park'>
+                        on Github
+                    </a>
+                </p>
+            </footer>
         </div>
     );
 }

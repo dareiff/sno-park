@@ -85,11 +85,23 @@
 
 .footer {
     display: flex;
+    flex-direction: column;
     flex: 1;
     padding: 2rem 0;
+    margin-top: 2rem;
+    width: 100%;
     border-top: 1px solid #eaeaea;
     justify-content: center;
     align-items: center;
+    gap: 1rem;
+}
+
+.footer div {
+    width: 200px;
+}
+
+.footer a {
+    text-decoration: underline;
 }
 
 .regionHeader {
@@ -101,13 +113,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-}
-
-.footer a {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-grow: 1;
 }
 
 .title a {
