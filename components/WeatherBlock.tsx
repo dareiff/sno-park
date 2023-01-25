@@ -75,7 +75,6 @@ export default function WeatherBlock(props: WeatherBlockI) {
     }
     const apiKey = process.env.NEXT_PUBLIC_OPENWEATHER_GEO_API_KEY;
     const apiKeyTwo = process.env.NEXT_PUBLIC_OPENWEATHERMAP_API_KEY;
-
     const propLat = props.gps !== undefined ? props.gps.split(', ')[0] : '';
     const propLon = props.gps !== undefined ? props.gps.split(', ')[1] : '';
     const [currentWeather, setCurrentWeather] =
@@ -99,8 +98,8 @@ export default function WeatherBlock(props: WeatherBlockI) {
                 }
             });
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [props.location]);
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, []);
 
     React.useEffect(() => {
         if (latLong.lat === '') {

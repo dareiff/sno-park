@@ -74,6 +74,19 @@
     text-align: center;
 }
 
+.legendItemActive {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 3px solid #eaeaea;
+    border-radius: 5px;
+    width: 100px;
+    height: 130px;
+    text-align: center;
+    border: 2px solid green;
+    box-shadow: 0 0 10px rgba(0, 128, 0, 0.369);
+}
+
 .legendItem > div {
     margin: 0.25rem;
     border-radius: 50%;
@@ -289,6 +302,20 @@
     border: 1px solid #abcaac;
     border-radius: 4px;
     color: black;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: block;
+    font-size: 16px;
+    margin: 4px auto;
+    cursor: pointer;
+    background: none;
+}
+
+.fakeButton {
+    border: 0;
+    /* border-radius: 4px; */
+    /* color: black; */
     padding: 15px 32px;
     text-align: center;
     text-decoration: none;

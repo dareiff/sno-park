@@ -36,6 +36,8 @@ export default function Home() {
         null | GeolocationPosition['coords']
     >(null);
 
+    const [buttonFilter, setButtonFilter] = React.useState<string>('');
+
     const [parkFilter, setParkFilter] = React.useState<string>('');
 
     React.useEffect(() => {
@@ -44,7 +46,7 @@ export default function Home() {
                 setLocation(location.coords);
             }
         });
-    }, [location]);
+    }, []);
 
     return (
         <div className={styles.container}>
@@ -108,9 +110,24 @@ export default function Home() {
                 </div>
                 <h3>Legend</h3>
                 <div className={styles.legend}>
-                    <div className={styles.legendItem}>
+                    <div
+                        className={
+                            buttonFilter === 'dog'
+                                ? styles.legendItemActive
+                                : styles.legendItem
+                        }
+                    >
                         <div className={styles.legendIcon}>
-                            <span title='Dog friendly'>🐕‍🦺</span>
+                            <button
+                                className={styles.fakeButton}
+                                onClick={() =>
+                                    buttonFilter !== 'dog'
+                                        ? setButtonFilter('dog')
+                                        : setButtonFilter('')
+                                }
+                            >
+                                <span title='Dog friendly'>🐕‍🦺</span>
+                            </button>
                         </div>
                         <div className={styles.legendText}>Dogs OK</div>
                     </div>
@@ -162,8 +179,15 @@ export default function Home() {
                                         </Link>
                                     </div>
                                     <div className={styles.grid}>
-                                        {snoparkRegion.snoParks.map(
-                                            (snopark: SnoParkI) => {
+                                        {snoparkRegion.snoParks
+                                            .filter((snopark: SnoParkI) => {
+                                                if (buttonFilter === 'dog') {
+                                                    return snopark.dogFriendly;
+                                                } else {
+                                                    return true;
+                                                }
+                                            })
+                                            .map((snopark: SnoParkI) => {
                                                 return (
                                                     <CardBody
                                                         key={
@@ -176,8 +200,7 @@ export default function Home() {
                                                         }
                                                     />
                                                 );
-                                            }
-                                        )}
+                                            })}
                                     </div>
                                 </div>
                             );
